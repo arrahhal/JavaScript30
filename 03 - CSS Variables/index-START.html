@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Scoped CSS Variables and JS</title>
   <link rel="icon" href="https://fav.farm/🔥" />
 </head>
-<body>
+
+<body id="body">
   <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
 
   <div class="controls">
@@ -19,13 +21,14 @@
     <input id="base" type="color" name="base" value="#ffc600">
   </div>
 
-  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+  <img class="image" src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    :root {
+      --color-bg: #ffc600;
+      --img-blur: 0px;
+      --img-space: 10px;
+    }
 
     body {
       text-align: center;
@@ -40,13 +43,21 @@
       margin-bottom: 50px;
     }
 
+    .image {
+      background-color: var(--color-bg);
+      filter: blur(var(--img-blur));
+      width: var(--img-space);
+      height: var(--img-space);
+    }
+
     input {
       width: 100px;
     }
   </style>
 
-  <script>
+  <script src="main.js">
   </script>
 
 </body>
+
 </html>
