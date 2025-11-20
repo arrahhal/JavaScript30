@@ -31,22 +31,24 @@
 				.then((data) => data.json()).then(json => {
 					cities = json;
 					isFetched = true;
-					suggestions.innerHTML = '';
+					let str = '';
 					json.forEach(city => {
-						suggestions.innerHTML += `<li><div>${city.city}</div><div>${city.population}</div></li>`;
+						str += `<li><div>${city.city}</div><div>${city.population}</div></li>`;
 					});
+					suggestions.innerHTML = str;
 				});
 		}
 
 		async function filterStuff(e) {
 			while (!isFetched) await new Promise(resolve => setTimeout(() => resolve(), 1000));
 			const query = e.target.value;
-			suggestions.innerHTML = '';
+			let str = '';
 			cities.forEach(city => {
 				if (city.city.includes(query)) {
-					suggestions.innerHTML += `<li><div>${city.city.replace(query, `<span class='hl'>${query}</span>`)}</div><div>${city.population}</div></li>`;
+					str += `<li><div>${city.city.replace(query, `<span class='hl'>${query}</span>`)}</div><div>${city.population}</div></li>`;
 				}
 			});
+			suggestions.innerHTML = str;
 		}
 		searchInput.addEventListener("click", doStuff, {once: true});
 		searchInput.addEventListener("input", filterStuff);
